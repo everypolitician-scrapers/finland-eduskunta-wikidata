@@ -31,7 +31,7 @@ puts "#{ids.count} records"
 
 ids.values.each_with_index do |id, i|
   puts i if (i % 50).zero?
-  data = WikiData::Fetcher.new(id: id).data or next
+  data = WikiData::Fetcher.new(id: id).data('fi','sv') or next
   ScraperWiki.save_sqlite([:id], data)
 end
 
