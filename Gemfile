@@ -12,6 +12,6 @@ gem "nokogiri"
 gem "open-uri-cached"
 gem "pry"
 gem "rest-client"
+gem "sqlite_magic", :git => "https://github.com/openc/sqlite_magic.git"
 gem "scraperwiki", git: "https://github.com/openaustralia/scraperwiki-ruby.git", branch: "morph_defaults"
-gem "wikidata-fetcher", '>=0.3.5', git: "https://github.com/everypolitician/wikidata-fetcher.git"
-
+gem "wikidata-fetcher", '>=0.5.1', git: "https://github.com/everypolitician/wikidata-fetcher.git"
