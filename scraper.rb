@@ -26,7 +26,7 @@ pages = [
 ]
 
 titles = pages.map { |p| titles_from(p) }.flatten.uniq
-ids = WikiData.ids_from_pages('en', titles)
+ids = WikiData.ids_from_pages('fi', titles)
 puts "#{ids.count} records"
 
 ids.values.each_with_index do |id, i|
