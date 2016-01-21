@@ -1,39 +1,80 @@
 #!/bin/env ruby
 # encoding: utf-8
 
-require 'scraperwiki'
 require 'wikidata/fetcher'
-
-require 'rest-client'
-require 'nokogiri'
-require 'colorize'
 require 'pry'
-require 'open-uri/cached'
-OpenURI::Cache.cache_path = '.cache'
 
-def noko_for(url)
-  Nokogiri::HTML(open(url).read) 
-end
+names = {}
+names[2011] = EveryPolitician::Wikidata.wikipedia_xpath( 
+  url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_2011–2015_kansanedustajista',
+  xpath: './/table[tr[contains(.,"Kotikunta")]]//tr[td]/td[1]/a/@title',
+)  
 
-def titles_from(url)
-  noko = noko_for(url)
-  noko.xpath('.//table[tr[contains(.,"Kotikunta")]]//tr[td]/td[1]/a/@title').map(&:text)
-end
+names[2007] = EveryPolitician::Wikidata.wikipedia_xpath( 
+  url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_2007–2011_kansanedustajista',
+  xpath: './/table[tr[contains(.,"Kotikunta")]]//tr[td]/td[1]/a/@title',
+) 
 
-pages = [
-  'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_2011%E2%80%932015_kansanedustajista',
-  'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_2007%E2%80%932011_kansanedustajista',
-  'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_2003%E2%80%932007_kansanedustajista',
-]
+names[2003] = EveryPolitician::Wikidata.wikipedia_xpath( 
+  url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_2003–2007_kansanedustajista',
+  xpath: './/table[tr[contains(.,"Kotikunta")]]//tr[td]/td[1]/a/@title',
+)
 
-titles = pages.map { |p| titles_from(p) }.flatten.uniq
-ids = WikiData.ids_from_pages('fi', titles)
-puts "#{ids.count} records"
+names[1999] = EveryPolitician::Wikidata.wikipedia_xpath( 
+  url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_1999–2003_kansanedustajista',
+  before: '//span[@id="Viitteet"]',
+  xpath: './/li//a[not(@class="new")][1]/@title',
+)  
 
-ids.values.each_with_index do |id, i|
-  puts i if (i % 50).zero?
-  data = WikiData::Fetcher.new(id: id).data('fi','sv') or next
-  ScraperWiki.save_sqlite([:id], data)
-end
+names[1995] = EveryPolitician::Wikidata.wikipedia_xpath( 
+  url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_1995–1999_kansanedustajista',
+  before: '//span[@id="Viitteet"]',
+  xpath: './/li//a[not(@class="new")][1]/@title',
+)  
 
-warn RestClient.post ENV['MORPH_REBUILDER_URL'], {} if ENV['MORPH_REBUILDER_URL']
+names[1991] = EveryPolitician::Wikidata.wikipedia_xpath( 
+  url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_1991–1995_kansanedustajista',
+  before: '//span[@id="Viitteet"]',
+  xpath: './/li//a[not(@class="new")][1]/@title',
+)  
+
+names[1987] = EveryPolitician::Wikidata.wikipedia_xpath( 
+  url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_1987–1991_kansanedustajista',
+  before: '//span[@id="Viitteet"]',
+  xpath: './/li//a[not(@class="new")][1]/@title',
+)  
+
+names[1983] = EveryPolitician::Wikidata.wikipedia_xpath( 
+  url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_1983–1987_kansanedustajista',
+  before: '//span[@id="Viitteet"]',
+  xpath: './/li//a[not(@class="new")][1]/@title',
+)  
+
+names[1979] = EveryPolitician::Wikidata.wikipedia_xpath( 
+  url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_1979–1983_kansanedustajista',
+  before: '//span[@id="L.C3.A4hteet"]',
+  xpath: './/li//a[not(@class="new")][1]/@title',
+)  
+
+names[1975] = EveryPolitician::Wikidata.wikipedia_xpath( 
+  url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_1975–1979_kansanedustajista',
+  before: '//span[@id="L.C3.A4hteet"]',
+  xpath: './/li//a[not(@class="new")][1]/@title',
+)  
+
+names[1972] = EveryPolitician::Wikidata.wikipedia_xpath( 
+  url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_1972–1975_kansanedustajista',
+  before: '//span[@id="L.C3.A4hteet"]',
+  xpath: './/li//a[not(@class="new")][1]/@title',
+)  
+
+names[1970] = EveryPolitician::Wikidata.wikipedia_xpath( 
+  url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_1970–1972_kansanedustajista',
+  before: '//span[@id="L.C3.A4hteet"]',
+  xpath: './/li//a[not(@class="new")][1]/@title',
+)  
+
+EveryPolitician::Wikidata.scrape_wikidata(names: { fi: names.values.flatten.uniq }, output: true)
+
+warn EveryPolitician::Wikidata.notify_rebuilder
+
