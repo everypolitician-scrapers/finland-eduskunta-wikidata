@@ -5,6 +5,11 @@ require 'wikidata/fetcher'
 require 'pry'
 
 names = {}
+names[2015] = EveryPolitician::Wikidata.wikipedia_xpath( 
+  url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_2015–2019_kansanedustajista',
+  xpath: './/table[tr[contains(.,"Puolue")]]//tr[td]/td[1]/a/@title',
+)  
+
 names[2011] = EveryPolitician::Wikidata.wikipedia_xpath( 
   url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_2011–2015_kansanedustajista',
   xpath: './/table[tr[contains(.,"Kotikunta")]]//tr[td]/td[1]/a/@title',
@@ -74,7 +79,7 @@ names[1970] = EveryPolitician::Wikidata.wikipedia_xpath(
   xpath: './/li//a[not(@class="new")][1]/@title',
 )  
 
-EveryPolitician::Wikidata.scrape_wikidata(names: { fi: names.values.flatten.uniq }, output: true)
+EveryPolitician::Wikidata.scrape_wikidata(names: { fi: names.values.flatten.uniq }, output: false)
 
 warn EveryPolitician::Wikidata.notify_rebuilder
 
