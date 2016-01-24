@@ -7,8 +7,8 @@ require 'pry'
 names = {}
 names[2015] = EveryPolitician::Wikidata.wikipedia_xpath( 
   url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_2015–2019_kansanedustajista',
-  xpath: './/table[tr[contains(.,"Puolue")]]//tr[td]/td[1]/a/@title',
-)  
+  xpath: './/table[.//th[.="Puolue"]]//tr[td]/td[1]//a/@title',
+)
 
 names[2011] = EveryPolitician::Wikidata.wikipedia_xpath( 
   url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_2011–2015_kansanedustajista',
@@ -79,7 +79,10 @@ names[1970] = EveryPolitician::Wikidata.wikipedia_xpath(
   xpath: './/li//a[not(@class="new")][1]/@title',
 )  
 
-EveryPolitician::Wikidata.scrape_wikidata(names: { fi: names.values.flatten.uniq }, output: false)
+names.each do |term,people|
+  raise "Only #{people.count} people for #{term}" unless people.count > 150
+end
 
+EveryPolitician::Wikidata.scrape_wikidata(names: { fi: names.values.flatten.uniq }, output: false)
 warn EveryPolitician::Wikidata.notify_rebuilder
 
