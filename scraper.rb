@@ -84,5 +84,4 @@ names.each do |term,people|
 end
 
 EveryPolitician::Wikidata.scrape_wikidata(names: { fi: names.values.flatten.uniq }, output: false)
-warn EveryPolitician::Wikidata.notify_rebuilder
 
