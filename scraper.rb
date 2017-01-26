@@ -27,31 +27,31 @@ names[2003] = EveryPolitician::Wikidata.wikipedia_xpath(
 
 names[1999] = EveryPolitician::Wikidata.wikipedia_xpath(
   url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_1999–2003_kansanedustajista',
-  before: '//span[@id="Viitteet"]',
+  before: '//span[@id="L.C3.A4hteet"]',
   xpath: './/li//a[not(@class="new")][1]/@title'
 )
 
 names[1995] = EveryPolitician::Wikidata.wikipedia_xpath(
   url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_1995–1999_kansanedustajista',
-  before: '//span[@id="Viitteet"]',
+  before: '//span[@id="L.C3.A4hteet"]',
   xpath: './/li//a[not(@class="new")][1]/@title'
 )
 
 names[1991] = EveryPolitician::Wikidata.wikipedia_xpath(
   url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_1991–1995_kansanedustajista',
-  before: '//span[@id="Viitteet"]',
+  before: '//span[@id="L.C3.A4hteet"]',
   xpath: './/li//a[not(@class="new")][1]/@title'
 )
 
 names[1987] = EveryPolitician::Wikidata.wikipedia_xpath(
   url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_1987–1991_kansanedustajista',
-  before: '//span[@id="Viitteet"]',
+  before: '//span[@id="L.C3.A4hteet"]',
   xpath: './/li//a[not(@class="new")][1]/@title'
 )
 
 names[1983] = EveryPolitician::Wikidata.wikipedia_xpath(
   url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_1983–1987_kansanedustajista',
-  before: '//span[@id="Viitteet"]',
+  before: '//span[@id="L.C3.A4hteet"]',
   xpath: './/li//a[not(@class="new")][1]/@title'
 )
 
