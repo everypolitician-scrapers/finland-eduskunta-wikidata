@@ -7,7 +7,7 @@ require 'pry'
 names = {}
 names[2015] = EveryPolitician::Wikidata.wikipedia_xpath(
   url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_2015–2019_kansanedustajista',
-  xpath: './/table[.//th[.="Puolue"]]//tr[td]/td[1]//a/@title'
+  xpath: './/table[.//th[.="Vaalipiiri"]]//tr[td]/td[1]//a/@title'
 )
 
 names[2011] = EveryPolitician::Wikidata.wikipedia_xpath(
