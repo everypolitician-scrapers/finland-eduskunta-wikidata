@@ -83,4 +83,4 @@ names.each do |term, people|
   raise "Only #{people.count} people for #{term}" unless people.count > 150
 end
 
-EveryPolitician::Wikidata.scrape_wikidata(names: { fi: names.values.flatten.uniq }, output: false)
+EveryPolitician::Wikidata.scrape_wikidata(names: { fi: names.values.flatten.uniq }, batch_size: 200)
