@@ -7,22 +7,22 @@ require 'pry'
 names = {}
 names[2015] = EveryPolitician::Wikidata.wikipedia_xpath(
   url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_2015–2019_kansanedustajista',
-  xpath: './/table[.//th[.="Vaalipiiri"]]//tr[td]/td[1]//a/@title'
+  xpath: './/table[.//th[contains(.,"Vaalipiiri")]]//tr[td]/td[1]//a/@title'
 )
 
 names[2011] = EveryPolitician::Wikidata.wikipedia_xpath(
   url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_2011–2015_kansanedustajista',
-  xpath: './/table[tr[contains(.,"Kotikunta")]]//tr[td]/td[1]/a/@title'
+  xpath: './/table[.//th[contains(.,"Kotikunta")]]//tr[td]/td[1]/a/@title'
 )
 
 names[2007] = EveryPolitician::Wikidata.wikipedia_xpath(
   url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_2007–2011_kansanedustajista',
-  xpath: './/table[tr[contains(.,"Kotikunta")]]//tr[td]/td[1]/a/@title'
+  xpath: './/table[.//th[contains(.,"Kotikunta")]]//tr[td]/td[1]/a/@title'
 )
 
 names[2003] = EveryPolitician::Wikidata.wikipedia_xpath(
   url: 'https://fi.wikipedia.org/wiki/Luettelo_vaalikauden_2003–2007_kansanedustajista',
-  xpath: './/table[tr[contains(.,"Kotikunta")]]//tr[td]/td[1]/a/@title'
+  xpath: './/table[.//th[contains(.,"Kotikunta")]]//tr[td]/td[1]/a/@title'
 )
 
 names[1999] = EveryPolitician::Wikidata.wikipedia_xpath(
